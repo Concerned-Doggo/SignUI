@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A-F Learn</title>
+
+    <link href="./output.css" rel="stylesheet" />
+    <link href="./input.css" rel="stylesheet" />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+  </head>
+
+  <body class="overflow-hidden">
+
+
+
+        <nav class="bg-sky-500 flex justify-between text-white align-middle mb-5 px-4">
+            <div class="p-3 flex font-bold text-2xl rounded-b-3xl">
+                <img class="w-10 mr-2"
+                    src="https://github.com/Concerned-Doggo/SignMeUp/blob/main/public/images/transparent-logo-1.png?raw=true" />
+                SignMeUp!
+            </div>
+            <div class="flex gap-5 font-semibold p-3 rounded-b-3xl">
+                <a href="/">Home</a>
+                <a href="/aboutus">AboutUs</a>
+                <a href="https://github.com/concerned-doggo">Github</a>
+            </div>
+        </nav>
+
+
+
+        <div class="flex flex-col md:flex-row flex-wrap bg-sky-300">
+            <div class="w-full md:w-1/5  align-middle">
+                <img
+                    class=" h-1/2 mb-10"
+                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.xfDkYz_APYdxo4wfthabOAHaHa%26pid%3DApi&f=1&ipt=69fe0e1df539e59a89dcba8b32419690555741cc182a08cd465d1fcda9b8ce69&ipo=images"
+                />
+                <p class="h-1/2">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</p>
+
+            </div>
+
+            <div class="h-screen w-1 bg-black"></div>
+
+            <div class="md:w-3/5 w-screen ">
+                <!-- <video class="input_video" style="display: None"></video> -->
+                <img
+                    class="w-screen"
+                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.keIG-gLYH4XdTkLvAFqI2QHaEo%26pid%3DApi&f=1&ipt=5d030138003307b81138663e2c82230b56e296f100655a3c60004b760a7b791f&ipo=images"
+                />
+
+                <canvas class="output_canvas" width="640px" height="360px"></canvas>
+            </div>
+        </div>
+
+        <!-- <script type="text/javascript" src="./test3.js"> </script> -->
+    </body>
+</html>
