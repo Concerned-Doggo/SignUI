@@ -3,7 +3,7 @@ export default {
   content: [
     "./index.html",
     "./main.js",
-        "./A-F.html",
+    "./LearnPages/A-F.html",
     "./src/**/*.{js,html}",
   ],
   theme: {
