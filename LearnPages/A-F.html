@@ -28,7 +28,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
   </head>
 
-  <body class="overflow-hidden">
+  <body class="">
     <nav
       class="bg-sky-500 flex justify-between text-white align-middle mb-5 px-4"
     >
@@ -46,30 +46,30 @@
       </div>
     </nav>
 
-    <div class="flex flex-col md:flex-row flex-wrap bg-sky-300">
-      <div class="w-full md:w-1/5 align-middle">
-        <img
-          id="alphabetImage"
-          class="h-1/2 mb-10"
-        />
-        <button type="button" class="bg-gray-500 text-white" id="initialize-btn" >
-          Start
-        </button>
+    <div class="flex flex-col md:flex-row flex-wrap h-[10vh]">
+      <div class="w-full md:w-1/6 align-middle">
+        <img id="signImage" class="h-1/3 mb-10" />
+        <img id="alphabetImage" class="h-1/3 mb-10" />
 
         <div id="label-container" class="bg-black text-white"></div>
-
       </div>
 
-      <div class="h-screen w-1 bg-black"></div>
-
-      <div class="md:w-3/5 w-screen">
+      <div class="w-1 bg-black"></div>
+      <button
+        type="button"
+        class="bg-white text-gray-700 font-bold py-2 px-4 rounded"
+        id="initialize-btn"
+      >
+        Start
+      </button>
+      <div class="md:w-4/6 w-screen bg-sky-300 ml-[9%] flex justify-certer rounded-3xl">
         <video class="input_video" style="display: None"></video>
         <!-- <img -->
         <!--   class="w-screen" -->
         <!--   src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.keIG-gLYH4XdTkLvAFqI2QHaEo%26pid%3DApi&f=1&ipt=5d030138003307b81138663e2c82230b56e296f100655a3c60004b760a7b791f&ipo=images" -->
         <!-- /> -->
 
-        <canvas class="output_canvas self-center" width="1200px" height="800px"></canvas>
+        <canvas class="output_canvas bg-sky-300 flex justify-certer rounded-3xl" width="1280px" height="720px"></canvas>
       </div>
     </div>
 

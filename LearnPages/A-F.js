@@ -1,11 +1,13 @@
 // MODEL LINK
 const URL = "http://localhost:5173/A_F-model/";
-const aplhabetImage = document.getElementById('alphabetImage');
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 let labelContainer = document.getElementById("label-container");
 
+
+const aplhabetImage = document.getElementById('alphabetImage');
+const signImage = document.getElementById('signImage');
 
 // Initializing 
 const initilize_btn = document.getElementById("initialize-btn");
@@ -27,7 +29,8 @@ const holistic = new Holistic({
 
 // Load the image model and setup the webcam
 let aplhabetIndex = 0;
-aplhabetImage.src = "../Assets/Images/Signs/" + aplhabets[aplhabetIndex] + ".png";
+aplhabetImage.src = "../Assets/Images/Alphabet/" + aplhabets[aplhabetIndex] + ".png";
+signImage.src = "../Assets/Images/Signs/" + aplhabets[aplhabetIndex] + ".png";
 
 async function init() {
     console.log("called init")
@@ -97,7 +100,8 @@ async function predict() {
     }
     if(prediction[maxIndex].className == aplhabets[aplhabetIndex]){
         aplhabetIndex = (aplhabetIndex + 1) % aplhabets.length;
-        aplhabetImage.src = "../Assets/Images/Signs/" + aplhabets[aplhabetIndex] + ".png";
+        aplhabetImage.src = "../Assets/Images/Alphabet/" + aplhabets[aplhabetIndex] + ".png";
+        signImage.src = "../Assets/Images/Signs/" + aplhabets[aplhabetIndex] + ".png";
     }
 }
 
