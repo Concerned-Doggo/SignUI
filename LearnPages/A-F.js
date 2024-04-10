@@ -27,7 +27,7 @@ const holistic = new Holistic({
 
 // Load the image model and setup the webcam
 let aplhabetIndex = 0;
-aplhabetImage.src = "../Assets/Images/Alphabets/" + aplhabets[aplhabetIndex] + ".png";
+aplhabetImage.src = "../Assets/Images/Signs/" + aplhabets[aplhabetIndex] + ".png";
 
 async function init() {
     console.log("called init")
@@ -97,7 +97,7 @@ async function predict() {
     }
     if(prediction[maxIndex].className == aplhabets[aplhabetIndex]){
         aplhabetIndex = (aplhabetIndex + 1) % aplhabets.length;
-        aplhabetImage.src = "../Assets/Images/Alphabets/" + aplhabets[aplhabetIndex] + ".png";
+        aplhabetImage.src = "../Assets/Images/Signs/" + aplhabets[aplhabetIndex] + ".png";
     }
 }
 
