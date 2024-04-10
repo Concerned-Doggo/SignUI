@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#preloader{
+    position: fixed;
+    height: 720px;
+    width: 1280px;
+    border-radius: 1.5rem;
+    z-index: 100;
+}

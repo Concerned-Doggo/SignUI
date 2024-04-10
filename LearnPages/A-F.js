@@ -1,21 +1,36 @@
+import * as Plotly from 'plotly.js-dist-min';
+
 // MODEL LINK
+
 const URL = "http://localhost:5173/A_F-model/";
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 let labelContainer = document.getElementById("label-container");
+const preloader = document.getElementById("preloader");
+const predictionChart = document.getElementById("predictionChart");
 
 
-const aplhabetImage = document.getElementById('alphabetImage');
+const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
 
 // Initializing 
 const initilize_btn = document.getElementById("initialize-btn");
-initilize_btn.addEventListener("click", init);
+initilize_btn.addEventListener("click", () => {
+    preloader.classList.remove("hidden");
+    initilize_btn.innerText = "Loading...";
+    init();
+});
 
+let loader = true;
+const plotlyLayout = {
+    colorway : ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
+};
 
 let model, webcam, maxPredictions;
-const aplhabets = ["A", "B", "C", "D", "E", "F"];
+const letters = ["A", "B", "C", "D", "E", "F"];
+
+
 
 
 console.log("A-F Loaded")
@@ -28,9 +43,9 @@ const holistic = new Holistic({
 // console.log("Holistic loaded")
 
 // Load the image model and setup the webcam
-let aplhabetIndex = 0;
-aplhabetImage.src = "../Assets/Images/Alphabet/" + aplhabets[aplhabetIndex] + ".png";
-signImage.src = "../Assets/Images/Signs/" + aplhabets[aplhabetIndex] + ".png";
+let letterIndex = 0;
+letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
+signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
 
 async function init() {
     console.log("called init")
@@ -41,6 +56,7 @@ async function init() {
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
     console.log("model loaded")
+    console.log(canvasElement);
 
     // append elements to the DOM
     // document.getElementById("webcam-container").appendChild(canvasElement);
@@ -49,7 +65,7 @@ async function init() {
         labelContainer.appendChild(document.createElement("div"));
     }
 
-    console.log(labelContainer.innerHTML);
+    console.log(loader);
     // configuring our holistic api according to webcam and requirements
     holistic.setOptions({
         modelComplexity: 1,
@@ -71,8 +87,9 @@ async function init() {
     });
 
     camera.start();
-    console.log("Camera element created")
+    // console.log("Camera element created")
 
+    console.log(loader);
     // on detecting webcam image draw landmarks
     window.requestAnimationFrame(loop);
     // holistic.onResults(draw); //change
@@ -90,23 +107,41 @@ async function predict() {
     // predict can take in an image, video or canvas html element
     const prediction = await model.predict(canvasElement);
     let maxIndex = 0;
+    const letterprobabilities = [];
     for (let i = 0; i < maxPredictions; i++) {
         const classPrediction =
             prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+        letterprobabilities.push(prediction[i].probability.toFixed(2) * 100);
         labelContainer.childNodes[i].innerHTML = classPrediction;
         if(prediction[i].probability > prediction[maxIndex].probability){
             maxIndex = i;
         }
     }
-    if(prediction[maxIndex].className == aplhabets[aplhabetIndex]){
-        aplhabetIndex = (aplhabetIndex + 1) % aplhabets.length;
-        aplhabetImage.src = "../Assets/Images/Alphabet/" + aplhabets[aplhabetIndex] + ".png";
-        signImage.src = "../Assets/Images/Signs/" + aplhabets[aplhabetIndex] + ".png";
+    if(prediction[maxIndex].className == letters[letterIndex]){
+        letterIndex = (letterIndex + 1) % letters.length;
+        letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
+        signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
     }
+    const data = [{
+        x:letterprobabilities,
+        y:letters,
+        type:"bar",
+        orientation:"h",
+        marker: {color:['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']}
+    }];
+
+    Plotly.newPlot("predictionChart", data, plotlyLayout);
 }
 
 function draw(results) {
+    if(loader){
+        loader = false;
+        preloader.classList.add("hidden");
+        initilize_btn.innerText = "Stop webcam";
+    }
     // console.log("Called draw function")
+    
+    // console.log();
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
@@ -134,4 +169,10 @@ function draw(results) {
         { color: '#FF0000', lineWidth: 2 });
     canvasCtx.restore();
 }
+
+
+const barColors = ["red", "green","blue","orange","brown"];
+const yvalues = [10, 20, 30, 40, 50];
+
+
 
