@@ -4,8 +4,8 @@
 
 #preloader{
     position: fixed;
-    height: 720px;
-    width: 1280px;
+    height: 504px;
+    width: 896px;
     border-radius: 1.5rem;
     z-index: 100;
 }

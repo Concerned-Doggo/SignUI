@@ -98,7 +98,8 @@ async function init() {
 async function loop() {
     // webcam.update(); // update the webcam frame
     holistic.onResults(draw);
-    await predict();
+    setTimeout(predict, 3000)
+    // await predict();
     window.requestAnimationFrame(loop);
 }
 
@@ -169,10 +170,3 @@ function draw(results) {
         { color: '#FF0000', lineWidth: 2 });
     canvasCtx.restore();
 }
-
-
-const barColors = ["red", "green","blue","orange","brown"];
-const yvalues = [10, 20, 30, 40, 50];
-
-
-
