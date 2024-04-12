@@ -31,11 +31,7 @@ let model, webcam, maxPredictions;
 const letters = ["A", "B", "C", "D", "E", "F"];
 
 
-let startTime = new Date().getTime();
-// let currentTime = new Date().getTime();
 
-// console.log("Start Time: " + startTime);
-// console.log("Current Time: " + currentTime);
 
 console.log("A-F Loaded")
 // calling holistic api from mediapipe cdn
@@ -121,8 +117,7 @@ async function predict() {
             maxIndex = i;
         }
     }
-    if(startTime + 5000 < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]){
-        startTime = new Date().getTime();
+    if(prediction[maxIndex].className == letters[letterIndex]){
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
         signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
@@ -174,3 +169,5 @@ function draw(results) {
         { color: '#FF0000', lineWidth: 2 });
     canvasCtx.restore();
 }
+
+
