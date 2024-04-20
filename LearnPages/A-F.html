@@ -33,37 +33,42 @@
 
   <body class="">
     <nav
-      class="bg-sky-500 flex justify-between text-white align-middle mb-5 px-4"
+      class="flex flex-col md:flex-row pl-[25vw] justify-center md:justify-between text-sky-400 align-middle md:mb-10 md:px-4"
     >
-      <div class="p-3 flex font-bold text-2xl rounded-b-3xl">
+      <a class="p-3 flex font-bold text-2xl rounded-b-3xl" href="/">
         <img
           class="w-10 mr-2"
           src="https://github.com/Concerned-Doggo/SignMeUp/blob/main/public/images/transparent-logo-1.png?raw=true"
         />
         SignMeUp!
-      </div>
+      </a>
       <div class="flex gap-5 font-semibold p-3 rounded-b-3xl">
         <a href="/">Home</a>
-        <a href="/aboutus">AboutUs</a>
-        <a href="https://github.com/concerned-doggo">Github</a>
+        <a href="/aboutus" class="text-gray-400">AboutUs</a>
+        <a href="https://github.com/concerned-doggo" class="text-gray-400">Github</a>
       </div>
     </nav>
 
-    <div class="flex flex-col md:flex-row flex-wrap h-[10vh]">
+    <div class=" grid grid-cols-5 h-[10vh]">
       <div class="w-full flex flex-col justify-center md:w-1/6">
-        <img id="signImage" class="h-3/5 mb-10" />
-        <img id="letterImage" class="h-2/5 mb-10" />
+        <img id="signImage" class=" mb-10 mt-8" />
+        <img id="letterImage" class="mb-10 w-[42%] self-center" />
 
         <div id="label-container" class="bg-black text-white hidden"></div>
-        <div id="predictionChart" class="bg-black text-white "></div>
+        
         <div class="bg-gray-200"></div>
       </div>
 
-      <div class="w-1 bg-black"></div>
+      <!-- <div class="w-1 bg-black"></div> -->
 
-      <div
+      <!-- <div
         class="md:w-[896px] h-[504px] w-screen bg-sky-300 flex flex-col justify-certer rounded-3xl fixed top-[15%] left-[25%]"
+      > -->
+      
+      <div
+        class=" bg-sky-300 flex flex-col justify-certer rounded-3xl fixed top-[15%] left-[25%]"
       >
+      
         <img
           id="preloader"
           src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3YwaGxvZ2pqcjc2Z3dweW91bjhxZGdmbWgxd2F3ZzJ4NW80ZDFsNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cnzP4cmBsiOrccg20V/giphy.gif"
@@ -83,6 +88,7 @@
           height="576px"
         ></canvas>
       </div>
+      <div id="predictionChart" class="bg-black text-white "></div>
     </div>
 
     <script type="module" src="./A-F.js"></script>
