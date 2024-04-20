@@ -49,9 +49,9 @@
       </div>
     </nav>
 
-    <div class=" grid grid-cols-5 h-[10vh]">
-      <div class="w-full flex flex-col justify-center md:w-1/6">
-        <img id="signImage" class=" mb-10 mt-8" />
+    <div class=" grid grid-cols-9 h-[10vh]">
+      <div class="w-full flex flex-col justify-center col-span-2 ">
+        <img id="signImage" class=" mb-10 mt-8 w-[42%] self-center" />
         <img id="letterImage" class="mb-10 w-[42%] self-center" />
 
         <div id="label-container" class="bg-black text-white hidden"></div>
@@ -66,29 +66,29 @@
       > -->
       
       <div
-        class=" bg-sky-300 flex flex-col justify-certer rounded-3xl fixed top-[15%] left-[25%]"
+        class=" bg-sky-300 flex flex-col justify-certer rounded-3xl col-span-5"
       >
       
         <img
           id="preloader"
-          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3YwaGxvZ2pqcjc2Z3dweW91bjhxZGdmbWgxd2F3ZzJ4NW80ZDFsNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cnzP4cmBsiOrccg20V/giphy.gif"
-          class="bg-black hidden"
+          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXo1cGlmZ3lweHIza3NiMmZxdWxzMGE0ZHVqMzVnbmNveXdtY2NsayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VseXvvxwowwCc/giphy.gif"
+          class="bg-black hidden col-span-2 "
         />
         <button
           type="button"
-          class="top-[5%] left-[55%] z-[1000] text-center text-gray-600 font-bold py-2 px-4 rounded-3xl bg-gray-200"
+          class="top-[5%] left-[55%] z-[1000] text-center text-gray-600 font-bold py-2 px-4 rounded-t-3xl bg-gray-200"
           id="initialize-btn"
         >
           Start Webcam
         </button>
         <video class="input_video" style="display: None"></video>
         <canvas
-          class="output_canvas bg-sky-300 flex justify-certer rounded-3xl"
+          class="output_canvas bg-sky-300 flex justify-certer rounded-b-3xl "
           width="1024px"
           height="576px"
         ></canvas>
       </div>
-      <div id="predictionChart" class="bg-black text-white "></div>
+      <div id="predictionChart" class=" text-white col-span-2 "></div>
     </div>
 
     <script type="module" src="./A-F.js"></script>
