@@ -14,8 +14,40 @@ const predictionChart = document.getElementById("predictionChart");
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
 
-let model, webcamRun = false, maxPredictions;
+let model, webcamRun = true, maxPredictions;
 
+// Initializing 
+const initilize_btn = document.getElementById("initialize-btn");
+initilize_btn.addEventListener("click", () => {
+    const btnText = initilize_btn.innerText;
+    if(btnText === "Start Webcam"){
+        preloader.classList.remove("hidden");
+        initilize_btn.innerText = "Loading...";
+        init();
+    }
+    else if(btnText === "Stop webcam"){
+        // preloader.classList.remove("hidden");
+        webcamRun = false;
+        initilize_btn.innerText = "Start Webcam";
+    }
+
+});
+
+let loader = true;
+const plotlyLayout = {
+    colorway : ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
+};
+
+const letters = ["A", "B", "C", "D", "E", "F"];
+
+
+let startTime = new Date().getTime();
+// let currentTime = new Date().getTime();
+
+// console.log("Start Time: " + startTime);
+// console.log("Current Time: " + currentTime);
+
+// console.log("A-F Loaded")
 // calling holistic api from mediapipe cdn
 const holistic = new Holistic({
     locateFile: (file) => {
@@ -81,7 +113,6 @@ async function init() {
     // load the model and metadata
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
-
     // append elements to the DOM
     for (let i = 0; i < maxPredictions; i++) { // and class labels
         labelContainer.appendChild(document.createElement("div"));
@@ -109,7 +140,6 @@ async function init() {
     if (webcamRun) {
         window.requestAnimationFrame(loop);
     }
-    // holistic.onResults(draw); //change
 }
 
 async function loop() {
@@ -117,6 +147,9 @@ async function loop() {
     holistic.onResults(draw);
     await predict();
     window.requestAnimationFrame(loop);
+    if (!webcamRun){
+        window.cancelAnimationFrame();
+    }
 }
 
 // run the webcam image through the image model
