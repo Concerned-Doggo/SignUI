@@ -2,7 +2,7 @@ import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
 
-const URL = "http://localhost:5173/Models/A-F/";
+const URL = "http://localhost:5173/A_F-model/";
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');

@@ -2,7 +2,7 @@ import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
 
-const URL = "http://localhost:5173/Models/A-F/";
+const URL = "http://localhost:5173/A_F-model/";
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
@@ -28,7 +28,7 @@ const plotlyLayout = {
 };
 
 let model, webcam, maxPredictions;
-const letters = ["A", "B", "C", "D", "E", "F"];
+const letters = ["G", "H", "I", "J", "K", "L"];
 
 
 let startTime = new Date().getTime();
@@ -37,7 +37,6 @@ let startTime = new Date().getTime();
 // console.log("Start Time: " + startTime);
 // console.log("Current Time: " + currentTime);
 
-console.log("A-F Loaded")
 // calling holistic api from mediapipe cdn
 const holistic = new Holistic({
     locateFile: (file) => {

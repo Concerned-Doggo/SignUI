@@ -2,10 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-#preloader{
-    position: fixed;
-    height: 504px;
-    width: 896px;
-    border-radius: 1.5rem;
-    z-index: 100;
+/* #preloader{ */
+/*     position: fixed; */
+/*     width: 100px; */
+/*     border-radius: 1.5rem; */
+/*     z-index: 100; */
+/* } */
+
+.socials-logo{
+    width: 20px;
+    display: inline-block;
 }
+.about-us-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .about-us-box {
+            background-color: #BAE6FD;
+            padding: 20px;
+            border-radius: 20px;
+            flex-basis: calc(45% - 10px); 
+            margin-bottom: 20px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            height: 200px; 
+            width: calc(45% - 10px); 
+            box-sizing: border-box;
+            border: 2px solid #fff; 
+        }
+
+        .about-us-box img {
+            max-width: 100px; 
+            margin-right: 20px;
+        }
+
+        .about-us-info {
+            flex-grow: 1;
+        }
+
+        .about-us-info h1,
+        .about-us-info h2 {
+            margin: 0;
+        }
+
