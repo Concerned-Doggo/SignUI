@@ -16,11 +16,25 @@ const signImage = document.getElementById('signImage');
 
 let model, webcamRun = true, maxPredictions;
 
+let loader = true;
+const plotlyLayout = {
+    colorway : ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
+};
+
+
+
 // Initializing 
 const initilize_btn = document.getElementById("initialize-btn");
 initilize_btn.addEventListener("click", () => {
     const btnText = initilize_btn.innerText;
+    let initialize_btn_click_cnt = 0;
     if(btnText === "Start Webcam"){
+        if(initialize_btn_click_cnt <= 1){
+            initialize_btn_click_cnt++;
+            loader = true;
+        }
+
+        webcamRun = true;
         preloader.classList.remove("hidden");
         initilize_btn.innerText = "Loading...";
         init();
@@ -29,14 +43,12 @@ initilize_btn.addEventListener("click", () => {
         // preloader.classList.remove("hidden");
         webcamRun = false;
         initilize_btn.innerText = "Start Webcam";
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        camera.stop();
     }
 
 });
-
-let loader = true;
-const plotlyLayout = {
-    colorway : ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
-};
 
 const letters = ["A", "B", "C", "D", "E", "F"];
 
@@ -113,9 +125,6 @@ async function loop() {
     holistic.onResults(draw);
     await predict();
     window.requestAnimationFrame(loop);
-    if (!webcamRun){
-        window.cancelAnimationFrame();
-    }
 }
 
 // run the webcam image through the image model
