@@ -5,12 +5,13 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SignMeUp!</title>
+    <title>SignMeUp! - About Us</title>
     <link href="./output.css" rel="stylesheet" />
     <link href="./input.css" rel="stylesheet" />
 </head>
 
 <body>
+    <!-- Navigation -->
     <nav class="bg-[#edf0f5] flex flex-col md:flex-row pl-[25vw] justify-center md:justify-between text-sky-400 align-middle md:mb-10 md:px-4">
         <div class="p-3 flex font-bold text-2xl rounded-b-3xl">
             <img class="w-10 mr-2" src="https://github.com/Concerned-Doggo/SignMeUp/blob/main/public/images/transparent-logo-1.png?raw=true" />
@@ -18,52 +19,71 @@
         </div>
         <div class="flex gap-5 font-semibold p-3 rounded-b-3xl">
             <a class="text-gray-400" href="/">Home</a>
-            <a href="/aboutus">AboutUs</a>
+            <a href="/aboutus">About Us</a>
             <a class="text-gray-400" href="https://github.com/concerned-doggo">Github</a>
         </div>
     </nav>
 
-        <div class="about-us-container">
-            <div class="about-us-box">
-                <img src="./Assets/Images/Logos/person1.png" alt="Image" />
-                <div class="about-us-info">
-                    <h1 class="font-bold text-gray-500">Abhay Pandey</h1>
-                    <a href="#" class="font-semibold text-gray-600 "><img class="socials-logo" src="./Assets/Images/Logos/linkedin.png"/><h2 class="inline-block">LinkedIn</h2></a>
-                    <a href="Resume.pdf">Resume</a>
+    <!-- About Us Content -->
+    <div>
+        <div class="flex flex-col justify-center">
+            <h1 class="text-3xl text-sky-400 font-bold mb-4 text-center">About Us</h1>
+            <h2 class="text-white text-center">You found the easter egg!</h2>
+            <p class="self-center para-width text-lg font-semibold text-gray-600 text-center mb-10">SignMeUp! is more than just a platform; it's a journey of empowerment and connection through sign language. Our mission is simple: to make sign language learning easy, enjoyable, and accessible to all.
+            Imagine a world where barriers dissolve, where communication knows no limits. That's the world we're building, one sign at a time.
+            At SignMeUp!, we believe that learning should be immersive and engaging. That's why we offer interactive lessons, live quizzes, and comprehensive dictionaries—all designed to bring sign language to life.</p>
+        </div>
+
+        <!-- Team Members -->
+        <div class="team-members">
+            <h2 class="text-2xl text-sky-400 font-bold mb-4 text-center">Meet Our Team</h2>
+            <h3 class="text-white text-center">Another one!</h3>
+            <div class="flex flex-wrap justify-center gap-8">
+                <!-- Abhay Pandey -->
+                <div class="about-us-box">
+                    <img src="./Assets/Images/Logos/person1.png" alt="Image" />
+                    <div class="about-us-info flex flex-col">
+                        <h3 class="font-bold text-gray-500 mb-2">Abhay Pandey</h3>
+                        <a href="https://www.linkedin.com/in/abhay-pandey-854ba12aa/" class="text-blue-500 font-semibold inline-block mb-1"><img class="socials-logo m-0" style="margin-right: 0;" src="./Assets/Images/Logos/linkedin.png" /> LinkedIn</a>
+                        <a href="Resume.pdf" class="text-blue-500 font-semibold inline-block"><img class="socials-logo m-0" style="margin-right: 3px;" src="./Assets/Images/Logos/resume.png" />Resume</a>
+                    </div>
                 </div>
-            </div>
-            <div class="about-us-box">
-                <img src="./Assets/Images/Logos/person1.png" alt="Image" />
-                <div class="about-us-info">
-                    <h1 class="font-bold text-gray-500">Atharva Aurangabadkar</h1>
-                    <a href="#" class="font-semibold text-gray-600 "><h2>LinkedIn</h2></a>
-                    <a href="Resume.pdf">Resume</a>
+                <!-- Atharva Aurangabadkar -->
+                <div class="about-us-box">
+                    <img src="./Assets/Images/Logos/person1.png" alt="Image" />
+                    <div class="about-us-info flex flex-col">
+                        <h3 class="font-bold text-gray-500 mb-2">Atharva Aurangabadkar</h3>
+                        <a href="https://www.linkedin.com/in/atharv-aurangabadkar-a24373289/" class="text-blue-500 font-semibold inline-block mb-1"><img class="socials-logo m-0" style="margin-right: 0;" src="./Assets/Images/Logos/linkedin.png" /> LinkedIn</a>
+                        <a href="Resume.pdf" class="text-blue-500 font-semibold inline-block"><img class="socials-logo m-0" style="margin-right: 3px;" src="./Assets/Images/Logos/resume.png" />Resume</a>
+                    </div>
                 </div>
-            </div>
-            <div class="about-us-box">
-                <img src="./Assets/Images/Logos/person1.png" alt="Image" />
-                <div class="about-us-info">
-                    <h1 class="font-bold text-gray-500">Harshal Chavan</h1>
-                    <a href="#" class="font-semibold text-gray-600 "><h2>LinkedIn</h2></a>
-                    <a href="Resume.pdf">Resume</a>
+                <!-- Harshal Chavan -->
+                <div class="about-us-box">
+                    <img src="./Assets/Images/Logos/person1.png" alt="Image" />
+                    <div class="about-us-info flex flex-col">
+                        <h3 class="font-bold text-gray-500 mb-2">Harshal Chavan</h3>
+                        <a href="https://www.linkedin.com/in/harshal-chavan-20129324b/" class="text-blue-500 font-semibold inline-block mb-1"><img class="socials-logo m-0" style="margin-right: 0;" src="./Assets/Images/Logos/linkedin.png" /> LinkedIn</a>
+                        <a href="Resume.pdf" class="text-blue-500 font-semibold inline-block"><img class="socials-logo m-0" style="margin-right: 3px;" src="./Assets/Images/Logos/resume.png" />Resume</a>
+                    </div>
                 </div>
-            </div>
-            <div class="about-us-box">
-                <img src="./Assets/Images/Logos/person1.png" alt="Image" />
-                <div class="about-us-info">
-                    <h1 class="font-bold text-gray-500">Ajinkya Birari</h1>
-                    <a href="#" class="font-semibold text-gray-600 "><h2>LinkedIn</h2></a>
-                    <a href="Resume.pdf">Resume</a>
+                <div class="about-us-box">
+                    <img src="./Assets/Images/Logos/person1.png" alt="Image" />
+                    <div class="about-us-info flex flex-col">
+                        <h3 class="font-bold text-gray-500 mb-2">Ajinkya Birari</h3>
+                        <a href="https://www.linkedin.com/in/ajinkya-birari-25566b229/" class="text-blue-500 font-semibold inline-block mb-1"><img class="socials-logo m-0" style="margin-right: 0;" src="./Assets/Images/Logos/linkedin.png" /> LinkedIn</a>
+                        <a href="Resume.pdf" class="text-blue-500 font-semibold inline-block"><img class="socials-logo m-0" style="margin-right: 3px;" src="./Assets/Images/Logos/resume.png" />Resume</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer class="bg-gradient-to-b from-sky-200 via-sky-800 via-75% to-sky-950 text-center text-white pt-5 rounded-t-3xl">
         <div class="mb-10 mt-10 flex flex-wrap justify-center gap-5">
             <h1 class="text-3xl w-full font-bold">SignMeUp!</h1>
             <a href="/" class="font-semibold">Home</a>
-            <a href="/LearnPages/A-F.html" class="font-semibold">AboutUs</a>
+            <a href="/aboutus" class="font-semibold">About Us</a>
             <a href="https://github.com/concerned-doggo" class="font-semibold">Github</a>
         </div>
         <div>

@@ -11,6 +11,7 @@
 
 .socials-logo{
     width: 20px;
+    margin-right: 0;
     display: inline-block;
 }
 .about-us-container {
@@ -47,5 +48,14 @@
         .about-us-info h1,
         .about-us-info h2 {
             margin: 0;
+        }
+
+        .about-us-content{
+            /* padding: 0% 8% 3% 25%; */
+            text-align: center;
+        }
+        .para-width{
+            max-width: 70ch;
+            /* padding-left: 10%; */
         }
 
