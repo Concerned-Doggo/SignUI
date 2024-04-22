@@ -141,6 +141,15 @@ async function predict() {
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
         signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+        console.log(score);
+    }
+    if(initilize_btn.innerText == "Stop webcam" && startTime + 15000 <= new Date().getTime()){
+        score -= 5;
+        startTime = new Date().getTime();
+        letterIndex = (letterIndex + 1) % letters.length;
+        letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
+        signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+        console.log(score);
     }
 
 

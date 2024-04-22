@@ -64,40 +64,6 @@ const camera = new Camera(videoElement, {
 });
 
 
-
-// Initializing 
-const initilize_btn = document.getElementById("initialize-btn");
-let initialize_btn_clickCnt = 0;
-initilize_btn.addEventListener("click", () => {
-    initialize_btn_clickCnt++;
-    const btnText = initilize_btn.innerText;
-    if (btnText === "Start Webcam") {
-        if(initialize_btn_clickCnt <= 1) preloader.classList.remove("hidden");
-        initilize_btn.innerText = "Loading...";
-        loader = true;
-        webcamRun = true;
-        init();
-    }
-    else if (btnText === "Stop webcam") {
-        // preloader.classList.remove("hidden");
-        canvasCtx.save();
-        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-        initilize_btn.innerText = "Start Webcam";
-        camera.stop();
-    }
-
-});
-
-let loader = true;
-const plotlyLayout = {
-    colorway: ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
-};
-
-const letters = ["A", "B", "C", "D", "E", "F"];
-
-
-let startTime = new Date().getTime();
-
 let letterIndex = 0;
 letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
 signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
