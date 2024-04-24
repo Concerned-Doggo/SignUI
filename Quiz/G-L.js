@@ -1,3 +1,4 @@
+import JSConfetti from 'js-confetti';
 import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
@@ -13,53 +14,10 @@ const predictionChart = document.getElementById("predictionChart");
 
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
+const jsConfetti = new JSConfetti()
 
-let model, webcamRun = true, maxPredictions;
+let model, webcamRun = true, maxPredictions, score = 0;
 
-let loader = true;
-const plotlyLayout = {
-    colorway : ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
-};
-
-
-
-// Initializing 
-const initilize_btn = document.getElementById("initialize-btn");
-initilize_btn.addEventListener("click", () => {
-    const btnText = initilize_btn.innerText;
-    let initialize_btn_click_cnt = 0;
-    if(btnText === "Start Webcam"){
-        if(initialize_btn_click_cnt <= 1){
-            initialize_btn_click_cnt++;
-            loader = true;
-        }
-
-        webcamRun = true;
-        preloader.classList.remove("hidden");
-        initilize_btn.innerText = "Loading...";
-        init();
-    }
-    else if(btnText === "Stop webcam"){
-        // preloader.classList.remove("hidden");
-        webcamRun = false;
-        initilize_btn.innerText = "Start Webcam";
-        canvasCtx.save();
-        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-        camera.stop();
-    }
-
-});
-
-const letters = ["M", "N", "O", "P", "Q", "R"];
-
-
-let startTime = new Date().getTime();
-// let currentTime = new Date().getTime();
-
-// console.log("Start Time: " + startTime);
-// console.log("Current Time: " + currentTime);
-
-// console.log("A-F Loaded")
 // calling holistic api from mediapipe cdn
 const holistic = new Holistic({
     locateFile: (file) => {
@@ -76,6 +34,45 @@ const camera = new Camera(videoElement, {
 });
 
 
+
+// Initializing 
+const initilize_btn = document.getElementById("initialize-btn");
+initilize_btn.addEventListener("click", () => {
+    let initialize_btn_clickCnt = 0;
+    const btnText = initilize_btn.innerText;
+    let initialize_btn_click_cnt = 0;
+    if (btnText === "Start Webcam") {
+        if(initialize_btn_click_cnt <= 1){
+            initialize_btn_click_cnt++;
+            loader = true;
+        }
+
+        preloader.classList.remove("hidden");
+        initilize_btn.innerText = "Loading...";
+        webcamRun = true;
+        init();
+    }
+    else if (btnText === "Stop webcam") {
+        // preloader.classList.remove("hidden");
+        webcamRun = false;
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        initilize_btn.innerText = "Start Webcam";
+        camera.stop();
+    }
+
+});
+
+let loader = true;
+const plotlyLayout = {
+    colorway: ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
+};
+
+const letters = ["G", "H", "I", "J", "K", "L"];
+
+
+let startTime = new Date().getTime();
+
 let letterIndex = 0;
 letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
 signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
@@ -91,6 +88,7 @@ async function init() {
     // load the model and metadata
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
+
     // append elements to the DOM
     for (let i = 0; i < maxPredictions; i++) { // and class labels
         labelContainer.appendChild(document.createElement("div"));
@@ -116,8 +114,10 @@ async function init() {
     // console.log(loader);
     // on detecting webcam image draw landmarks
     if (webcamRun) {
+        startTime = new Date().getTime();
         window.requestAnimationFrame(loop);
     }
+    // holistic.onResults(draw); //change
 }
 
 async function loop() {
@@ -142,18 +142,36 @@ async function predict() {
             maxIndex = i;
         }
     }
+    // adding delay before every new letter prediction
     if (startTime + 5000 < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]) {
+        score += 5;
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
         signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+        console.log(score);
     }
-    if(initilize_btn.innerText === "Stop webcam" && startTime + 15000 < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
+    if(initilize_btn.innerText == "Stop webcam" && startTime + 15000 <= new Date().getTime()){
+        score -= 5;
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
         signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+        console.log(score);
     }
+    if(score == 5){
+        jsConfetti.addConfetti();
+        setTimeout(jsConfetti.clearCanvas(), 2000);
+    }
+
+
+
+    // if(initilize_btn.innerText === "Stop webcam" && startTime + 15000 < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
+    //     startTime = new Date().getTime();
+    //     letterIndex = (letterIndex + 1) % letters.length;
+    //     letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
+    //     signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+    // }
     const data = [{
         x: letterprobabilities,
         y: letters,
@@ -205,3 +223,4 @@ function draw(results) {
         { color: '#FF0000', lineWidth: 2 });
     canvasCtx.restore();
 }
+

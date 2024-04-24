@@ -1,3 +1,4 @@
+import JSConfetti from 'js-confetti';
 import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
@@ -14,7 +15,10 @@ const predictionChart = document.getElementById("predictionChart");
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
 
-let model, webcamRun = false, maxPredictions, score = 0;
+const jsConfetti = new JSConfetti()
+const checkmark = document.getElementById('checkmark');
+
+let model, webcamRun = true, maxPredictions, score = 0;
 
 // calling holistic api from mediapipe cdn
 const holistic = new Holistic({
@@ -35,19 +39,24 @@ const camera = new Camera(videoElement, {
 
 // Initializing 
 const initilize_btn = document.getElementById("initialize-btn");
-let initialize_btn_clickCnt = 0;
 initilize_btn.addEventListener("click", () => {
-    initialize_btn_clickCnt++;
+    let initialize_btn_clickCnt = 0;
     const btnText = initilize_btn.innerText;
+    let initialize_btn_click_cnt = 0;
     if (btnText === "Start Webcam") {
-        if(initialize_btn_clickCnt <= 1) preloader.classList.remove("hidden");
+        if(initialize_btn_click_cnt <= 1){
+            initialize_btn_click_cnt++;
+            loader = true;
+        }
+
+        preloader.classList.remove("hidden");
         initilize_btn.innerText = "Loading...";
-        loader = true;
         webcamRun = true;
         init();
     }
     else if (btnText === "Stop webcam") {
         // preloader.classList.remove("hidden");
+        webcamRun = false;
         canvasCtx.save();
         canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
         initilize_btn.innerText = "Start Webcam";
@@ -65,6 +74,7 @@ const letters = ["A", "B", "C", "D", "E", "F"];
 
 
 let startTime = new Date().getTime();
+let firstTime = true;
 
 let letterIndex = 0;
 letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
@@ -107,6 +117,7 @@ async function init() {
     // console.log(loader);
     // on detecting webcam image draw landmarks
     if (webcamRun) {
+        startTime = new Date().getTime();
         window.requestAnimationFrame(loop);
     }
     // holistic.onResults(draw); //change
@@ -137,6 +148,11 @@ async function predict() {
     // adding delay before every new letter prediction
     if (startTime + 5000 < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]) {
         score += 5;
+        // give tick mark
+        checkmark.classList.remove("hidden");
+        setTimeout(() => {
+            checkmark.classList.add("hidden");
+        }, 1000)
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
@@ -152,6 +168,13 @@ async function predict() {
         console.log(score);
     }
 
+    if(firstTime && score == 20){
+        firstTime = false;
+        await jsConfetti.addConfetti();
+        setTimeout(() => {
+            jsConfetti.clearCanvas();
+        }, 5000);
+    }
 
 
     // if(initilize_btn.innerText === "Stop webcam" && startTime + 15000 < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
@@ -173,6 +196,7 @@ async function predict() {
 
 function draw(results) {
     if (loader) {
+        startTime = new Date().getTime();
         loader = false;
         preloader.classList.add("hidden");
         initilize_btn.innerText = "Stop webcam";

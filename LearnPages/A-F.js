@@ -167,6 +167,7 @@ async function predict() {
 
 function draw(results) {
     if (loader) {
+        startTime = new Date().getTime();
         loader = false;
         preloader.classList.add("hidden");
         initilize_btn.innerText = "Stop webcam";

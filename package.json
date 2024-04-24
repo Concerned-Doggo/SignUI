@@ -22,6 +22,7 @@
     "@mediapipe/holistic": "^0.5.1675471629",
     "@teachablemachine/image": "^0.8.5",
     "chart.js": "^4.4.2",
+    "js-confetti": "^0.12.0",
     "plotly.js": "^2.31.0",
     "plotly.js-dist-min": "^2.31.0"
   }
