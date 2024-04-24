@@ -28,50 +28,31 @@
 
     <div class="md:px-32 md:py-2 p-10">
         <h1 class="text-sky-400 font-bold text-3xl mb-5">FEEDBACK US!</h1>
-        <p class="text-gray-600 font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias hic
-            suscipit, excepturi obcaecati cumque asperiores enim facere ab repellendus quas numquam reprehenderit
-            dignissimos quo et mollitia nisi, quos tempora ipsa.</p>
+        <p class="text-gray-600 font-semibold">We value your input! Your feedback helps us improve our website
+             and better serve your needs. Please take a moment to share your thoughts, suggestions, 
+             or any issues you encountered. We appreciate your time and commitment to helping us enhance your 
+             experience.</p>
     </div>
 
-
-
-
-
-    <div class="flex md:p-32 p-10 flex-col md:flex-row">
+    <div class="flex md:px-32 p-10 flex-col md:flex-row">
         <img class="w-40 md:w-96 md:mr-20 self-center md:self-start mb-10"
             src="https://images-ext-1.discordapp.net/external/FeJ2voBV6mrnDlkgEYMcs9B9RDwkz_0-4l2kaa67nSg/https/raw.githubusercontent.com/Concerned-Doggo/SignMeUp/main/public/images/feedback/feedback.png?format=webp&quality=lossless&width=700&height=700"
             alt="Feedback img">
 
-        <form>
+        <form id="feedbackForm">
             <div class="flex flex-col">
-                <div class="ml-3 mb-3">
-                    <label for=""> Email:</label>
-                    <input type="email" placeholder="example@mail.com">
+                <div class="ml-3 my-10 flex flex-col">
+                    <label for="email"> Email:</label>
+                    <input type="email" id="email" class="w-[40ch] border-2 border-solid border-black rounded-lg" placeholder="example@mail.com">
                 </div>
                 <div class="ml-3 mb-3 flex flex-col">
-                    <label class="">Feedback:</label>
-                    <input class="border-2 border-solid border-black" type="text">
+                    <label for="feedback" class="">Feedback:</label>
+                    <input id="feedback" class="w-[40ch] h-[100px] border-2 border-solid border-black rounded-lg" type="text">
                 </div>
-                <button class="bg-sky-400 p-2 rounded-3xl">Submit</button>
-
+                <button class="bg-sky-400 p-2 rounded-3xl ml-3" type="submit">Submit</button>
             </div>
-
         </form>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <footer
         class="bg-gradient-to-b from-sky-200 via-sky-800 via-75% to-sky-950 text-center text-white pt-5 rounded-t-3xl">
@@ -88,7 +69,18 @@
         <div class="border-sky-950 border-4"></div>
     </footer>
 
-    <script type="module" src=""></script>
+    <script>
+        const feedbackForm = document.getElementById('feedbackForm');
+
+        feedbackForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const feedback = document.getElementById('feedback').value;
+            const subject = 'Feedback for SignMeUp!';
+            const mailtoLink = `mailto:support@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(feedback)}&cc=${encodeURIComponent(email)}`;
+            window.location.href = mailtoLink;
+        });
+    </script>
 </body>
 
 </html>
