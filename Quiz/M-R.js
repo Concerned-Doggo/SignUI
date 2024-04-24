@@ -1,8 +1,9 @@
+import JSConfetti from 'js-confetti';
 import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
 
-const URL = "http://localhost:5173/Models/A-F/";
+const URL = "http://localhost:5173/Models/M-R/";
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
@@ -13,6 +14,9 @@ const predictionChart = document.getElementById("predictionChart");
 
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
+
+const jsConfetti = new JSConfetti()
+const correctMark = document.getElementById('correct');
 
 let model, webcamRun = true, maxPredictions, score = 0;
 
@@ -66,7 +70,7 @@ const plotlyLayout = {
     colorway: ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
 };
 
-const letters = ["M","N","O","P","Q","R"];
+const letters = ["M", "N", "O", "P", "Q", "R"];
 
 
 let startTime = new Date().getTime();
@@ -144,6 +148,22 @@ async function predict() {
     // adding delay before every new letter prediction
     if (startTime + 5000 < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]) {
         score += 5;
+        // give tick mark
+        if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/check-mark.png"){
+            console.log('inside src');
+            correctMark.src =  "http://localhost:5173/Assets/Images/Logos/thumbs-up.png";
+        }
+        else{
+            console.log('inside src 123');
+            correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png";
+        }
+
+        console.log(correctMark.src);
+        correctMark.classList.remove("hidden");
+        setTimeout(() => {
+            correctMark.classList.add("hidden");
+        }, 1000);
+
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
@@ -159,6 +179,13 @@ async function predict() {
         console.log(score);
     }
 
+    if(firstTime && score == 20){
+        firstTime = false;
+        await jsConfetti.addConfetti();
+        setTimeout(() => {
+            jsConfetti.clearCanvas();
+        }, 5000);
+    }
 
 
     // if(initilize_btn.innerText === "Stop webcam" && startTime + 15000 < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
@@ -218,4 +245,3 @@ function draw(results) {
         { color: '#FF0000', lineWidth: 2 });
     canvasCtx.restore();
 }
-
