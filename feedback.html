@@ -11,45 +11,52 @@
 </head>
 
 <body>
-    <nav class="bg-sky-500 flex justify-between text-white align-middle mb-10 px-4">
-        <div class="p-3 flex font-bold text-2xl rounded-b-3xl">
+    <nav
+        class="bg-[#edf0f5] flex flex-col md:flex-row pl-[25vw] justify-center md:justify-between text-sky-400 align-middle md:mb-10 md:px-4">
+        <a class="p-3 flex font-bold text-2xl rounded-b-3xl" href="/">
             <img class="w-10 mr-2"
                 src="https://github.com/Concerned-Doggo/SignMeUp/blob/main/public/images/transparent-logo-1.png?raw=true" />
             SignMeUp!
-        </div>
+        </a>
         <div class="flex gap-5 font-semibold p-3 rounded-b-3xl">
-            <a href="/">Home</a>
-            <a href="/aboutus">AboutUs</a>
-            <a href="https://github.com/concerned-doggo">Github</a>
+            <a href="/" class="text-gray-400">Home</a>
+            <a href="/feedback">Feedback</a>
+            <a href="/aboutus" class="text-gray-400">AboutUs</a>
+            <a href="https://github.com/concerned-doggo" class="text-gray-400">Github</a>
         </div>
     </nav>
 
-    <div>
-        <h1>FEEDBACK US!</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias hic suscipit, excepturi obcaecati cumque asperiores enim facere ab repellendus quas numquam reprehenderit dignissimos quo et mollitia nisi, quos tempora ipsa.</p>
+    <div class="md:px-32 md:py-2 p-10">
+        <h1 class="text-sky-400 font-bold text-3xl mb-5">FEEDBACK US!</h1>
+        <p class="text-gray-600 font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias hic
+            suscipit, excepturi obcaecati cumque asperiores enim facere ab repellendus quas numquam reprehenderit
+            dignissimos quo et mollitia nisi, quos tempora ipsa.</p>
     </div>
 
 
 
 
 
-    <div class="flex">
-        
-        <img src="https://images-ext-1.discordapp.net/external/FeJ2voBV6mrnDlkgEYMcs9B9RDwkz_0-4l2kaa67nSg/https/raw.githubusercontent.com/Concerned-Doggo/SignMeUp/main/public/images/feedback/feedback.png?format=webp&quality=lossless&width=700&height=700" alt="Feedback img">
-    
-        <div class="flex flex-col">
-            <div>
+    <div class="flex md:p-32 p-10 flex-col md:flex-row">
+        <img class="w-40 md:w-96 md:mr-20 self-center md:self-start mb-10"
+            src="https://images-ext-1.discordapp.net/external/FeJ2voBV6mrnDlkgEYMcs9B9RDwkz_0-4l2kaa67nSg/https/raw.githubusercontent.com/Concerned-Doggo/SignMeUp/main/public/images/feedback/feedback.png?format=webp&quality=lossless&width=700&height=700"
+            alt="Feedback img">
 
-                <label for="">your email:</label>
-                <input type="email" placeholder="example@mail.com">
+        <form>
+            <div class="flex flex-col">
+                <div class="ml-3 mb-3">
+                    <label for=""> Email:</label>
+                    <input type="email" placeholder="example@mail.com">
+                </div>
+                <div class="ml-3 mb-3 flex flex-col">
+                    <label class="">Feedback:</label>
+                    <input class="border-2 border-solid border-black" type="text">
+                </div>
+                <button class="bg-sky-400 p-2 rounded-3xl">Submit</button>
+
             </div>
-            <div>
-                <label for="">your feedback:</label>
 
-                <input class="border-2 border-solid border-black" type="text">
-            </div>
-
-        </div>
+        </form>
     </div>
 
 
@@ -81,7 +88,7 @@
         <div class="border-sky-950 border-4"></div>
     </footer>
 
-    <script type="module" src="/main.js"></script>
+    <script type="module" src=""></script>
 </body>
 
 </html>
