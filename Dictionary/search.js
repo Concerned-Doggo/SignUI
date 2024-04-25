@@ -1,4 +1,4 @@
-import {URL, YOUTUBE_EMBED_URL, YOUTUBE_WATCH_URL} from "../credentials";   
+import {URL, YOUTUBE_EMBED_URL, } from "../credentials";   
 
 const youtubeIframe = document.getElementById("youtubeIframe"); 
 
