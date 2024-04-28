@@ -15,6 +15,8 @@ const predictionChart = document.getElementById("predictionChart");
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
 
+const scoreTag = document.getElementById('scoreTag');
+
 const jsConfetti = new JSConfetti()
 const correctMark = document.getElementById('correct');
 
@@ -74,6 +76,7 @@ const letters = ["G", "H", "I", "J", "K", "L"];
 
 
 let startTime = new Date().getTime();
+let firstTime = true;
 
 let letterIndex = 0;
 letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
@@ -147,23 +150,23 @@ async function predict() {
     // adding delay before every new letter prediction
     if (startTime + 5000 < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]) {
         score += 5;
-        
         // give tick mark
         if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/check-mark.png"){
             console.log('inside src');
             correctMark.src =  "http://localhost:5173/Assets/Images/Logos/thumbs-up.png";
         }
-        else{
+        else if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/thumbs-up.png"){
             console.log('inside src 123');
             correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png";
         }
 
-        console.log(correctMark.src);
+        // console.log(correctMark.src);
+        
         correctMark.classList.remove("hidden");
         setTimeout(() => {
             correctMark.classList.add("hidden");
         }, 1000);
- 
+
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
@@ -171,26 +174,30 @@ async function predict() {
         console.log(score);
     }
     if(initilize_btn.innerText == "Stop webcam" && startTime + 15000 <= new Date().getTime()){
+        
         score -= 5;
+        if(score < 0) score = 0;
+        // console.log("in");
+        
+
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
         signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
         console.log(score);
     }
-    if(score == 5){
-        jsConfetti.addConfetti();
-        setTimeout(jsConfetti.clearCanvas(), 2000);
+    
+    scoreTag.innerText = `Score: ${score}`;
+    
+    if(firstTime && score == 20){
+        firstTime = false;
+        await jsConfetti.addConfetti();
+        setTimeout(() => {
+            jsConfetti.clearCanvas();
+        }, 5000);
     }
 
 
-
-    // if(initilize_btn.innerText === "Stop webcam" && startTime + 15000 < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
-    //     startTime = new Date().getTime();
-    //     letterIndex = (letterIndex + 1) % letters.length;
-    //     letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
-    //     signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
-    // }
     const data = [{
         x: letterprobabilities,
         y: letters,
@@ -242,4 +249,3 @@ function draw(results) {
         { color: '#FF0000', lineWidth: 2 });
     canvasCtx.restore();
 }
-

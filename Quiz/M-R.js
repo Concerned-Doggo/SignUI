@@ -15,6 +15,8 @@ const predictionChart = document.getElementById("predictionChart");
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
 
+const scoreTag = document.getElementById('scoreTag');
+
 const jsConfetti = new JSConfetti()
 const correctMark = document.getElementById('correct');
 
@@ -153,12 +155,13 @@ async function predict() {
             console.log('inside src');
             correctMark.src =  "http://localhost:5173/Assets/Images/Logos/thumbs-up.png";
         }
-        else{
+        else if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/thumbs-up.png"){
             console.log('inside src 123');
             correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png";
         }
 
-        console.log(correctMark.src);
+        // console.log(correctMark.src);
+        
         correctMark.classList.remove("hidden");
         setTimeout(() => {
             correctMark.classList.add("hidden");
@@ -171,14 +174,21 @@ async function predict() {
         console.log(score);
     }
     if(initilize_btn.innerText == "Stop webcam" && startTime + 15000 <= new Date().getTime()){
+        
         score -= 5;
+        if(score < 0) score = 0;
+        // console.log("in");
+        
+
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
         signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
         console.log(score);
     }
-
+    
+    scoreTag.innerText = `Score: ${score}`;
+    
     if(firstTime && score == 20){
         firstTime = false;
         await jsConfetti.addConfetti();
@@ -188,12 +198,6 @@ async function predict() {
     }
 
 
-    // if(initilize_btn.innerText === "Stop webcam" && startTime + 15000 < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
-    //     startTime = new Date().getTime();
-    //     letterIndex = (letterIndex + 1) % letters.length;
-    //     letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
-    //     signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
-    // }
     const data = [{
         x: letterprobabilities,
         y: letters,
