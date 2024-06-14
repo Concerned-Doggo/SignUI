@@ -155,7 +155,7 @@ async function predict() {
             console.log('inside src');
             correctMark.src =  "http://localhost:5173/Assets/Images/Logos/thumbs-up.png";
         }
-        else{
+        else if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/thumbs-up.png"){
             console.log('inside src 123');
             correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png";
         }

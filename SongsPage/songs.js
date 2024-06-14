@@ -1,34 +1,4 @@
-
-x.controls = true;
-x.currentTime = 20;
-
-const timeStamps = [25, 38, 45, 55, 65];
-let timeIndex = 0;
-
-window.requestAnimationFrame(loop);
-function loop() {
-
-    if (x.currentTime >= timeStamps[timeIndex]) {
-        timeIndex++;
-        x.pause();
-        setInterval(() => {
-            x.play();
-        }, 5000);
-    }
-
-    window.requestAnimationFrame(loop);
-}
-
-
-
-
-
-
-
-
-
-
-
+import JSConfetti from 'js-confetti';
 import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
@@ -41,64 +11,22 @@ let labelContainer = document.getElementById("label-container");
 const preloader = document.getElementById("preloader");
 const predictionChart = document.getElementById("predictionChart");
 
-const correctMark = document.getElementById("correct");
 
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
 
- // video element display
-const video = document.getElementById('video');
-const x = document.getElementById('x');
-video.addEventListener('loadeddata', () => {
-    x.appendChild(video);
-});
+const vid = document.getElementById("video");
+vid.currentTime = 20;
+const timestamps =[ [24, 33], [36, 44], [47, 55], [60, 68], [83, 92] ];
+let timeIndex = 0;
 
-let model, webcamRun = true, maxPredictions;
+const scoreTag = document.getElementById('scoreTag');
 
-let loader = true;
-const plotlyLayout = {
-    colorway : ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
-};
+const jsConfetti = new JSConfetti()
+const correctMark = document.getElementById('correct');
 
+let model, webcamRun = true, maxPredictions, score = 0;
 
-
-// Initializing 
-const initilize_btn = document.getElementById("initialize-btn");
-initilize_btn.addEventListener("click", () => {
-    const btnText = initilize_btn.innerText;
-    let initialize_btn_click_cnt = 0;
-    if(btnText === "Start Webcam"){
-        if(initialize_btn_click_cnt <= 1){
-            initialize_btn_click_cnt++;
-            loader = true;
-        }
-
-        webcamRun = true;
-        preloader.classList.remove("hidden");
-        initilize_btn.innerText = "Loading...";
-        init();
-    }
-    else if(btnText === "Stop webcam"){
-        // preloader.classList.remove("hidden");
-        webcamRun = false;
-        initilize_btn.innerText = "Start Webcam";
-        canvasCtx.save();
-        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-        camera.stop();
-    }
-
-});
-
-const letters = ["A", "B", "C", "D", "E", "F"];
-
-
-let startTime = new Date().getTime();
-// let currentTime = new Date().getTime();
-
-// console.log("Start Time: " + startTime);
-// console.log("Current Time: " + currentTime);
-
-// console.log("A-F Loaded")
 // calling holistic api from mediapipe cdn
 const holistic = new Holistic({
     locateFile: (file) => {
@@ -115,10 +43,50 @@ const camera = new Camera(videoElement, {
 });
 
 
+
+// Initializing 
+const initilize_btn = document.getElementById("initialize-btn");
+initilize_btn.addEventListener("click", () => {
+    let initialize_btn_clickCnt = 0;
+    const btnText = initilize_btn.innerText;
+    let initialize_btn_click_cnt = 0;
+    if (btnText === "Start Webcam") {
+        if(initialize_btn_click_cnt <= 1){
+            initialize_btn_click_cnt++;
+            loader = true;
+        }
+
+        preloader.classList.remove("hidden");
+        initilize_btn.innerText = "Loading...";
+        webcamRun = true;
+        init();
+    }
+    else if (btnText === "Stop webcam") {
+        // preloader.classList.remove("hidden");
+        webcamRun = false;
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        initilize_btn.innerText = "Start Webcam";
+        camera.stop();
+        vid.pause();
+    }
+
+});
+
+let loader = true;
+const plotlyLayout = {
+    colorway: ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
+};
+
+const letters = ["A", "B", "C", "D", "E", "F"];
+
+
+let startTime = new Date().getTime();
+let firstTime = true;
+
 let letterIndex = 0;
 letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
 signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
-
 
 
 
@@ -130,6 +98,7 @@ async function init() {
     // load the model and metadata
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
+
     // append elements to the DOM
     for (let i = 0; i < maxPredictions; i++) { // and class labels
         labelContainer.appendChild(document.createElement("div"));
@@ -155,12 +124,19 @@ async function init() {
     // console.log(loader);
     // on detecting webcam image draw landmarks
     if (webcamRun) {
+        startTime = new Date().getTime();
         window.requestAnimationFrame(loop);
     }
+    // holistic.onResults(draw); //change
 }
 
 async function loop() {
     // webcam.update(); // update the webcam frame
+    if(vid.currentTime >= timestamps[timeIndex][0]){
+        timeIndex++;
+        startTime = new Date().getTime();
+        vid.pause();
+    }
     holistic.onResults(draw);
     await predict();
     window.requestAnimationFrame(loop);
@@ -181,25 +157,57 @@ async function predict() {
             maxIndex = i;
         }
     }
-    if (startTime + 5000 < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]) {
+    // adding delay before every new letter prediction
+    if (!!vid.paused && prediction[maxIndex].className == letters[letterIndex]) {
+        score += 5;
+        // give tick mark
+        if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/check-mark.png"){
+            // console.log('inside src');
+            correctMark.src =  "http://localhost:5173/Assets/Images/Logos/thumbs-up.png";
+        }
+        else if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/thumbs-up.png"){
+            // console.log('inside src 123');
+            correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png";
+        }
 
+        // console.log(correctMark.src);
+        vid.play();
         correctMark.classList.remove("hidden");
         setTimeout(() => {
             correctMark.classList.add("hidden");
         }, 1000);
 
+        startTime = new Date().getTime();
+        letterIndex = (letterIndex + 1) % letters.length;
+        letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
+        signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+        console.log(score);
+    }
+    console.log(vid.paused);
+    if(vid.paused && initilize_btn.innerText == "Stop webcam" && startTime + 15000 <= new Date().getTime()){
+        score -= 5;
+        if(score < 0) score = 0;
+        // console.log("in");
+        
+        vid.play();
+        startTime = new Date().getTime();
+        letterIndex = (letterIndex + 1) % letters.length;
+        letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
+        signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+        console.log(score);
+    }
+    
+    scoreTag.innerText = `Score: ${score}`;
+    
+    if(firstTime && score == 20){
+        firstTime = false;
+        await jsConfetti.addConfetti();
+        setTimeout(() => {
+            jsConfetti.clearCanvas();
+        }, 5000);
+    }
 
-        startTime = new Date().getTime();
-        letterIndex = (letterIndex + 1) % letters.length;
-        letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
-        signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
-    }
-    if(initilize_btn.innerText === "Stop webcam" && startTime + 15000 < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
-        startTime = new Date().getTime();
-        letterIndex = (letterIndex + 1) % letters.length;
-        letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
-        signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
-    }
+
     const data = [{
         x: letterprobabilities,
         y: letters,
@@ -213,6 +221,7 @@ async function predict() {
 
 function draw(results) {
     if (loader) {
+        vid.play();
         startTime = new Date().getTime();
         loader = false;
         preloader.classList.add("hidden");

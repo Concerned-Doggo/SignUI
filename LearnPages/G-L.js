@@ -143,6 +143,25 @@ async function predict() {
         }
     }
     if (startTime + 5000 < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]) {
+
+        // give tick mark
+        if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/check-mark.png"){
+            console.log('inside src');
+            correctMark.src =  "http://localhost:5173/Assets/Images/Logos/thumbs-up.png";
+        }
+        else{
+            console.log('inside src 123');
+            correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png";
+        }
+
+        // console.log(correctMark.src);
+        
+        correctMark.classList.remove("hidden");
+        setTimeout(() => {
+            correctMark.classList.add("hidden");
+        }, 1000);
+
+
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";

@@ -44,27 +44,24 @@
       </a>
       <div class="flex gap-5 font-semibold p-3 rounded-b-3xl">
         <a href="/">Home</a>
-        <a href="/aboutus" class="text-gray-400">AboutUs</a>
-        <a href="https://github.com/concerned-doggo" class="text-gray-400">Github</a>
+        <a href="/aboutus">AboutUs</a>
+        <a href="https://github.com/concerned-doggo">Github</a>
       </div>
     </nav>
 
     <div class=" grid grid-cols-9 h-[10vh]">
       <div class="w-full flex flex-col justify-center col-span-2 ">
         <img id="signImage" style="display: none;" class=" mb-10 mt-8 w-[42%] self-center" />
-        <img id="letterImage" class="mb-10 w-[42%] self-center" />
+        <div id="scoreTag" class="mb-10 rounded-3xl text-sky-400 font-bold text-center text-3xl border-2 border-black">Score: </div>
+        <img id="letterImage" class=" w-[42%] self-center" />
 
         <div id="label-container" class="bg-black text-white hidden"></div>
         
         <div class="bg-gray-200"></div>
       </div>
 
-      <!-- <div class="w-1 bg-black"></div> -->
-
-      <!-- <div
-        class="md:w-[896px] h-[504px] w-screen bg-sky-300 flex flex-col justify-certer rounded-3xl fixed top-[15%] left-[25%]"
-      > -->
       
+
       <div
         class=" bg-sky-300 flex flex-col justify-certer rounded-3xl col-span-5 relative"
       >
@@ -83,7 +80,12 @@
           src="../Assets/Videos/loading_Sign.gif"
           class="bg-black hidden w-[35%] rounded-3xl absolute top-[28%] left-[32%]"
         />
-
+        <img
+          id="correct"
+          src="../Assets/Images/Logos/check-mark.png"
+          style="width: 120px; top: 35%; left: 42%"
+          class="hidden rounded-3xl absolute"
+        />
         <video class="input_video" style="display: None"></video>
         <canvas
           class="output_canvas bg-sky-300 flex justify-certer rounded-b-3xl "
