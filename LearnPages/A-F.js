@@ -15,7 +15,7 @@ const predictionChart = document.getElementById("predictionChart");
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
 const correctMark = document.getElementById('correct');
-correctMark.src = `${ImageUrl}Logos/check-mark.png`;
+correctMark.src = `${ImageUrl}Logos/check-mark.png?raw=true`;
 
 let model, webcamRun = true, maxPredictions;
 
