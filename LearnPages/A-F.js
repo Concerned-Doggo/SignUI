@@ -2,6 +2,7 @@ import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
 
+const ImageUrl = "https://github.com/Concerned-Doggo/SignUI/blob/main/Assets/Images/";
 const URL = "https://raw.githubusercontent.com/Concerned-Doggo/SignUI/main/Models/A-F/";
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
@@ -14,7 +15,7 @@ const predictionChart = document.getElementById("predictionChart");
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
 const correctMark = document.getElementById('correct');
-correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png"
+correctMark.src = `${ImageUrl}Logos/check-mark.png`;
 
 let model, webcamRun = true, maxPredictions;
 
@@ -79,8 +80,8 @@ const camera = new Camera(videoElement, {
 
 
 let letterIndex = 0;
-letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
-signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+letterImage.src = `${ImageUrl}Alphabet/${letters[letterIndex]}.png?raw=true`;
+signImage.src = `${ImageUrl}Signs/${letters[letterIndex]}.png?raw=true`;
 
 
 
@@ -153,14 +154,14 @@ async function predict() {
 
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
-        letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
-        signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+        letterImage.src =  `${ImageUrl}Alphabet/${letters[letterIndex]}.png?raw=true`;
+        signImage.src =  `${ImageUrl}Signs/${letters[letterIndex]}.png?raw=true`;
     }
     if(initilize_btn.innerText === "Stop webcam" && startTime + 15000 < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
-        letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
-        signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+        letterImage.src =  `${ImageUrl}Alphabet/${letters[letterIndex]}.png?raw=true`;
+        signImage.src =  `${ImageUrl}Signs/${letters[letterIndex]}.png?raw=true`;
     }
     const data = [{
         x: letterprobabilities,
