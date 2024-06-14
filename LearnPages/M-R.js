@@ -2,7 +2,7 @@ import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
 
-const URL = "http://localhost:5173/Models/A-F/";
+const URL = "https://raw.githubusercontent.com/Concerned-Doggo/SignUI/main/Models/M-R/";
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
@@ -13,6 +13,7 @@ const predictionChart = document.getElementById("predictionChart");
 
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
+const correctMark = document.getElementById('correct');
 
 let model, webcamRun = true, maxPredictions;
 

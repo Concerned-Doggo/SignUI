@@ -2,7 +2,7 @@ import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
 
-const URL = "http://localhost:5173/Models/A-F/";
+const URL = "https://raw.githubusercontent.com/Concerned-Doggo/SignUI/main/Models/A-F/";
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
@@ -13,6 +13,8 @@ const predictionChart = document.getElementById("predictionChart");
 
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
+const correctMark = document.getElementById('correct');
+correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png"
 
 let model, webcamRun = true, maxPredictions;
 
@@ -143,23 +145,11 @@ async function predict() {
         }
     }
     if (startTime + 5000 < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]) {
-        // give tick mark
-        if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/check-mark.png"){
-            console.log('inside src');
-            correctMark.src =  "http://localhost:5173/Assets/Images/Logos/thumbs-up.png";
-        }
-        else{
-            console.log('inside src 123');
-            correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png";
-        }
-
-        // console.log(correctMark.src);
         
         correctMark.classList.remove("hidden");
         setTimeout(() => {
             correctMark.classList.add("hidden");
         }, 1000);
-
 
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
