@@ -50,23 +50,17 @@
     </nav>
 
     <div class=" grid grid-cols-1 md:grid-cols-9 h-[10vh]">
-      <div class="w-full flex md:flex-col flex-row justify-center col-span-2 ">
-        <img id="signImage" class=" mb-10 h-[80%] mt-8 md:w-[42%] self-center" />
-        <img id="letterImage" class="mt-8 mb-10 h-[60%] md:w-[42%]  w-[30%] self-centre" />
+      <div class="w-full flex md:flex-col flex-row gap-10 justify-center col-span-2 ">
+        <img id="signImage" class=" mt-8 mb-10 h-[60%] md:h-[70%] md:w-[42%] self-center" />
+        <img id="letterImage" class="mt-8 mb-10 h-[50%] md:h-[70%] md:w-[42%]  w-[30%] self-center" />
 
         <div id="label-container" class="bg-black text-white hidden"></div>
         
         <div class="bg-gray-200"></div>
       </div>
-
-      <!-- <div class="w-1 bg-black"></div> -->
-
-      <!-- <div
-        class="md:w-[896px] h-[504px] w-screen bg-sky-300 flex flex-col justify-certer rounded-3xl fixed top-[15%] left-[25%]"
-      > -->
       
       <div
-        class=" bg-sky-300 flex flex-col justify-certer rounded-3xl col-span-5 relative"
+        class=" bg-sky-300 flex flex-col justify-certer rounded-3xl col-span-5 relative m-2"
       >
       
 
@@ -97,7 +91,7 @@
           height="576px"
         ></canvas>
       </div>
-      <div id="predictionChart" class=" text-white col-span-2 "></div>
+      <div id="predictionChart" class="hidden text-white col-span-2 "></div>
     </div>
 
     <script type="module" src="./A-F.js"></script>
