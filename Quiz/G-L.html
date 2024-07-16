@@ -44,32 +44,30 @@
       </a>
       <div class="flex gap-5 font-semibold p-3 rounded-b-3xl">
         <a href="/">Home</a>
-        <a href="/aboutus">AboutUs</a>
-        <a href="https://github.com/concerned-doggo">Github</a>
+        <a href="/aboutus" class="text-gray-400">AboutUs</a>
+        <a href="https://github.com/concerned-doggo" class="text-gray-400">Github</a>
       </div>
     </nav>
 
-    <div class=" grid grid-cols-9 h-[10vh]">
-      <div class="w-full flex flex-col justify-center col-span-2 ">
-        <img id="signImage" style="display: none;" class=" mb-10 mt-8 w-[42%] self-center" />
-        <div id="scoreTag" class="mb-10 rounded-3xl text-sky-400 font-bold text-center text-3xl border-2 border-black">Score: </div>
-        <img id="letterImage" class=" w-[42%] self-center" />
+    <div class=" grid grid-cols-1 md:grid-cols-9 h-[10vh]">
+      <div class="w-full flex md:flex-col flex-row gap-10 justify-center col-span-2 ">
+        <img id="signImage" style="display: none;" class=" mt-8 mb-10 h-[60%] md:h-[70%] md:w-[42%] self-center" />
+        <div id="scoreTag" class="my-10 rounded-3xl text-sky-400 font-bold text-center text-3xl border-2 border-black">Score: </div>
+        <img id="letterImage" class=" my-10 h-[50%] md:h-[70%] md:w-[42%]  w-[30%] self-center" />
 
         <div id="label-container" class="bg-black text-white hidden"></div>
         
         <div class="bg-gray-200"></div>
       </div>
-
       
-
       <div
-        class=" bg-sky-300 flex flex-col justify-certer rounded-3xl col-span-5 relative"
+        class=" bg-sky-300 flex flex-col justify-certer rounded-3xl col-span-5 relative m-2"
       >
       
 
         <button
           type="button"
-          class="top-[5%] left-[55%] z-[1000] text-center text-gray-600 font-bold py-2 px-4 rounded-t-3xl bg-gray-200"
+          class=" md:top-[5%] md:left-[55%] z-[1000] text-center text-gray-600 font-bold py-2 px-4 rounded-t-3xl bg-gray-200"
           id="initialize-btn"
         >
           Start Webcam
@@ -86,6 +84,7 @@
           style="width: 120px; top: 35%; left: 42%"
           class="hidden rounded-3xl absolute"
         />
+
         <video class="input_video" style="display: None"></video>
         <canvas
           class="output_canvas bg-sky-300 flex justify-certer rounded-b-3xl "
@@ -93,9 +92,29 @@
           height="576px"
         ></canvas>
       </div>
-      <div id="predictionChart" class=" text-white col-span-2 "></div>
+      <div id="predictionChart" class="invisible md:visible text-white col-span-2 "></div>
     </div>
+    
+    <footer
+      class="bg-gradient-to-b md:hidden from-sky-200 via-sky-800 via-75% to-sky-950 text-center text-white pt-5 rounded-t-3xl"
+    >
+      <div class="mb-10 mt-10 flex flex-wrap justify-center gap-5">
+        <h1 class="text-3xl w-full font-bold">SignMeUp!</h1>
+        <a href="/" class="font-semibold">Home</a>
+        <a href="/LearnPages/A-F.html" class="font-semibold">AboutUs</a>
+        <a href="https://github.com/concerned-doggo" class="font-semibold"
+          >Github</a
+        >
+      </div>
+      <div>
+        <h1 class="font-bold text-xl">Made with ❤️</h1>
+        <p class="font-semibold">2024</p>
+      </div>
+      <div class="border-sky-950 border-4"></div>
+    </footer>
 
+
+    
     <script type="module" src="./G-L.js"></script>
   </body>
 </html>

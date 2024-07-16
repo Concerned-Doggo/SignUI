@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>0-9 Learn</title>
+    <title>A-F Learn</title>
 
     <link href="../output.css" rel="stylesheet" />
     <link href="../input.css" rel="stylesheet" />
@@ -49,30 +49,24 @@
       </div>
     </nav>
 
-    <div class=" grid grid-cols-9 h-[10vh]">
-      <div class="w-full flex flex-col justify-center col-span-2 ">
-        <img id="signImage" class=" mb-10 mt-8 w-[42%] self-center" />
-        <img id="letterImage" class="mb-10 w-[42%] self-center" />
+    <div class=" grid grid-cols-1 md:grid-cols-9 h-[10vh]">
+      <div class="w-full flex md:flex-col flex-row gap-10 justify-center col-span-2 ">
+        <img id="signImage" class=" mt-8 mb-10 h-[60%] md:h-[70%] md:w-[42%] self-center" />
+        <img id="letterImage" class="mt-8 mb-10 h-[50%] md:h-[70%] md:w-[42%]  w-[30%] self-center" />
 
         <div id="label-container" class="bg-black text-white hidden"></div>
         
         <div class="bg-gray-200"></div>
       </div>
-
-      <!-- <div class="w-1 bg-black"></div> -->
-
-      <!-- <div
-        class="md:w-[896px] h-[504px] w-screen bg-sky-300 flex flex-col justify-certer rounded-3xl fixed top-[15%] left-[25%]"
-      > -->
       
       <div
-        class=" bg-sky-300 flex flex-col justify-certer rounded-3xl col-span-5 relative"
+        class=" bg-sky-300 flex flex-col justify-certer rounded-3xl col-span-5 relative m-2"
       >
       
 
         <button
           type="button"
-          class="top-[5%] left-[55%] z-[1000] text-center text-gray-600 font-bold py-2 px-4 rounded-t-3xl bg-gray-200"
+          class=" md:top-[5%] md:left-[55%] z-[1000] text-center text-gray-600 font-bold py-2 px-4 rounded-t-3xl bg-gray-200"
           id="initialize-btn"
         >
           Start Webcam
@@ -83,6 +77,12 @@
           src="../Assets/Videos/loading_Sign.gif"
           class="bg-black hidden w-[35%] rounded-3xl absolute top-[28%] left-[32%]"
         />
+        <img
+          id="correct"
+          src="../Assets/Images/Logos/check-mark.png"
+          style="width: 120px; top: 35%; left: 42%"
+          class="hidden rounded-3xl absolute"
+        />
 
         <video class="input_video" style="display: None"></video>
         <canvas
@@ -91,9 +91,29 @@
           height="576px"
         ></canvas>
       </div>
-      <div id="predictionChart" class=" text-white col-span-2 "></div>
+      <div id="predictionChart" class="invisible md:visible text-white col-span-2 "></div>
     </div>
+    
+    <footer
+      class="bg-gradient-to-b md:hidden from-sky-200 via-sky-800 via-75% to-sky-950 text-center text-white pt-5 rounded-t-3xl"
+    >
+      <div class="mb-10 mt-10 flex flex-wrap justify-center gap-5">
+        <h1 class="text-3xl w-full font-bold">SignMeUp!</h1>
+        <a href="/" class="font-semibold">Home</a>
+        <a href="/LearnPages/A-F.html" class="font-semibold">AboutUs</a>
+        <a href="https://github.com/concerned-doggo" class="font-semibold"
+          >Github</a
+        >
+      </div>
+      <div>
+        <h1 class="font-bold text-xl">Made with ❤️</h1>
+        <p class="font-semibold">2024</p>
+      </div>
+      <div class="border-sky-950 border-4"></div>
+    </footer>
 
+
+    
     <script type="module" src="./numbers.js"></script>
   </body>
 </html>
