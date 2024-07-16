@@ -33,6 +33,10 @@ export default {
 
                 
             }
+        },
+        watch: {
+            include: './**'
         }
+
     }
 }

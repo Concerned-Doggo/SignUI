@@ -2,7 +2,7 @@ import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
 
-const ImageUrl = "https://github.com/Concerned-Doggo/SignUI/blob/main/Assets/Images/";
+const ImageUrl = "../Assets/Images/";
 const URL = "https://raw.githubusercontent.com/Concerned-Doggo/SignUI/main/Models/S-Z/";
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
@@ -80,8 +80,8 @@ const camera = new Camera(videoElement, {
 
 
 let letterIndex = 0;
-letterImage.src = `${ImageUrl}Alphabet/${letters[letterIndex]}.png?raw=true`;
-signImage.src = `${ImageUrl}Signs/${letters[letterIndex]}.png?raw=true`;
+letterImage.src = `${ImageUrl}Alphabet/${letters[letterIndex]}.png`;
+signImage.src = `${ImageUrl}Signs/${letters[letterIndex]}.png`;
 
 async function init() {
 

@@ -2,7 +2,7 @@ import * as Plotly from 'plotly.js-dist-min';
 
 // MODEL LINK
 
-const ImageUrl = "https://github.com/Concerned-Doggo/SignUI/blob/main/Assets/Images/";
+const ImageUrl = "../Assets/Images/";
 const URL = "https://raw.githubusercontent.com/Concerned-Doggo/SignUI/main/Models/G-L/";
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
