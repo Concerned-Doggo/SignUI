@@ -45,7 +45,6 @@ let ImageUrl = "../Assets/Images/Alphabet";
 if(startLetter === '1' || startLetter === '5'){
     ImageUrl = `../Assets/Images/Numbers`;   
 }
-let SignUrl = "../Assets/Images/Signs";
 const Url = `https://raw.githubusercontent.com/Concerned-Doggo/SignUI/main/Models/${path}/`;
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
@@ -124,7 +123,7 @@ const camera = new Camera(videoElement, {
 
 let letterIndex = 0;
 letterImage.src = `${ImageUrl}/${letters[letterIndex]}.png?raw=true`;
-signImage.src = `${SignUrl}/${letters[letterIndex]}.png?raw=true`;
+signImage.src = `/Assets/Images/Signs/${letters[letterIndex]}.png?raw=true`;
 
 
 
@@ -200,7 +199,7 @@ async function predict() {
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src =  `${ImageUrl}/${letters[letterIndex]}.png?raw=true`;
-        signImage.src =  `${SignUrl}/${letters[letterIndex]}.png?raw=true`;
+        signImage.src =  `/Assets/Images/Signs/${letters[letterIndex]}.png?raw=true`;
     }
     if(initilize_btn.innerText === "Stop webcam" && startTime + waitTime < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
         nextMark.classList.remove("hidden");
@@ -210,7 +209,7 @@ async function predict() {
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src =  `${ImageUrl}/${letters[letterIndex]}.png?raw=true`;
-        signImage.src =  `${SignUrl}/${letters[letterIndex]}.png?raw=true`;
+        signImage.src =  `/Assets/Images/Signs/${letters[letterIndex]}.png?raw=true`;
     }
     const data = [{
         x: letterprobabilities,

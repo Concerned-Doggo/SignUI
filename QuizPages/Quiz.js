@@ -34,7 +34,6 @@ const waitTime = 15000;
 const detectionDelay = 5000;
 
 // MODEL LINK
-const ImageUrl = "../Assets/Images/";
 const Url = `https://raw.githubusercontent.com/Concerned-Doggo/SignUI/main/Models/${path}/`;
 
 const videoElement = document.getElementsByClassName('input_video')[0];
@@ -112,8 +111,8 @@ let startTime = new Date().getTime();
 let firstTime = true;
 
 let letterIndex = 0;
-letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
-signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
+letterImage.src = "/Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
+signImage.src = "/Assets/Images/Signs/" + letters[letterIndex] + ".png";
 
 
 
@@ -184,13 +183,13 @@ async function predict() {
     if (startTime + detectionDelay < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]) {
         score += 5;
         // give tick mark
-        if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/check-mark.png"){
+        if(correctMark.src == "/Assets/Images/Logos/check-mark.png"){
             console.log('inside src');
-            correctMark.src =  `${imageUrl}Assets/Images/Logos/thumbs-up.png`;
+            correctMark.src =  `/Assets/Images/Logos/thumbs-up.png`;
         }
-        else if(correctMark.src == `${imageUrl}Assets/Images/Logos/thumbs-up.png`){
+        else if(correctMark.src == `/Assets/Images/Logos/thumbs-up.png`){
             console.log('inside src 123');
-            correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png";
+            correctMark.src = "/Assets/Images/Logos/check-mark.png";
         }
 
         // console.log(correctMark.src);
@@ -204,9 +203,8 @@ async function predict() {
 
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
-        letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
-        signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
-        console.log(score);
+        letterImage.src = "/Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
+        signImage.src = "/Assets/Images/Signs/" + letters[letterIndex] + ".png";
     }
     if(initilize_btn.innerText == "Stop webcam" && startTime + waitTime <= new Date().getTime()){
         
@@ -224,7 +222,6 @@ async function predict() {
         letterIndex = (letterIndex + 1) % letters.length;
         letterImage.src = "../Assets/Images/Alphabet/" + letters[letterIndex] + ".png";
         signImage.src = "../Assets/Images/Signs/" + letters[letterIndex] + ".png";
-        console.log(score);
     }
     
     scoreTag.innerHTML = `Score: </br> <span class="text-[50px] font-bold">${score}</span>`;
