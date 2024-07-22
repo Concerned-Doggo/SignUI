@@ -51,7 +51,8 @@
 
     <div class=" grid grid-cols-1 md:grid-cols-9 h-[10vh]">
       <div class="w-full flex md:flex-col flex-row gap-10 justify-center col-span-2 ">
-        <img id="signImage" class=" mt-8 mb-10 h-[60%] md:h-[70%] md:w-[42%] self-center" />
+        <img id="signImage" style="display: none;" class=" mt-8 mb-10 h-[60%] md:h-[70%] md:w-[42%] self-center" />
+                <div id="scoreTag" class=" flex flex-col align-center justify-center gap-4 p-2 rounded-3xl text-sky-400 font-bold text-center text-3xl border-2 border-black my-10  h-[60%] md:h-[70%] md:w-[42%] self-center text-center">Score: <span id="scoreSpan" class="text-[50px] font-bold">0</span></div>
         <img id="letterImage" class="mt-8 mb-10 h-[50%] md:h-[70%] md:w-[42%]  w-[30%] self-center" />
 
         <div id="label-container" class="bg-black text-white hidden"></div>
@@ -80,9 +81,16 @@
         <img
           id="correct"
           src="../Assets/Images/Logos/check-mark.png"
-          style="width: 120px; top: 35%; left: 42%"
-          class="hidden rounded-3xl absolute"
+          style="width: 120px; top: 25%; left: 42%"
+          class=" hidden rounded-3xl absolute"
         />
+
+        <p
+          id="nextMark"
+          src="../Assets/Images/Logos/check-mark.png"
+          style="top: 55%; left: 44%; color: green; background: white;"
+          class="hidden absolute text-3xl font-bold bg-gray-300 rounded-xl p-2 border-black border-2 "
+        >Next</p>
 
         <video class="input_video" style="display: None"></video>
         <canvas
@@ -94,26 +102,7 @@
       <div id="predictionChart" class="invisible md:visible text-white col-span-2 "></div>
     </div>
     
-    <footer
-      class="bg-gradient-to-b md:hidden from-sky-200 via-sky-800 via-75% to-sky-950 text-center text-white pt-5 rounded-t-3xl"
-    >
-      <div class="mb-10 mt-10 flex flex-wrap justify-center gap-5">
-        <h1 class="text-3xl w-full font-bold">SignMeUp!</h1>
-        <a href="/" class="font-semibold">Home</a>
-        <a href="/LearnPages/A-F.html" class="font-semibold">AboutUs</a>
-        <a href="https://github.com/concerned-doggo" class="font-semibold"
-          >Github</a
-        >
-      </div>
-      <div>
-        <h1 class="font-bold text-xl">Made with ❤️</h1>
-        <p class="font-semibold">2024</p>
-      </div>
-      <div class="border-sky-950 border-4"></div>
-    </footer>
-
-
     
-    <script type="module" src="./numbers.js"></script>
+    <script type="module" src="./Quiz.js"></script>
   </body>
 </html>

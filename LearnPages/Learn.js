@@ -1,9 +1,52 @@
 import * as Plotly from 'plotly.js-dist-min';
 
+const path = (window.location.search).split('?')[1];
+
+let letters = [];
+const startLetter = path.charAt(0);
+console.log(startLetter);
+switch (startLetter) {
+    case 'A':
+        letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+        break;
+        
+    case 'G':
+        letters = ['G', 'H', 'I', 'J', 'K', 'L'];
+        break;
+    case 'M':
+        letters = ['M', 'N', 'O', 'P', 'Q', 'R'];
+        break;
+    case 'S':
+        letters = ['S', 'T', 'U', 'V'];
+        break;
+    case 'W':
+        letters = ['W', 'X', 'Y', 'Z'];
+        break;
+    case '1':
+        letters = ['1', '2', '3', '4'];
+        break;
+    case '5':
+        letters = ['5', '6', '7', '8', '9'];
+        break;
+    default:
+        letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+        break;
+}
+
+console.log(letters);
+console.log(path)
+
+const waitTime = 15000;
+const detectionDelay = 5000;
+
 // MODEL LINK
 
-const ImageUrl = "../Assets/Images/";
-const URL = "https://raw.githubusercontent.com/Concerned-Doggo/SignUI/main/Models/G-L/";
+let ImageUrl = "../Assets/Images/Alphabet";
+if(startLetter === '1' || startLetter === '5'){
+    ImageUrl = `../Assets/Images/Numbers`;   
+}
+let SignUrl = "../Assets/Images/Signs";
+const Url = `https://raw.githubusercontent.com/Concerned-Doggo/SignUI/main/Models/${path}/`;
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
@@ -15,7 +58,8 @@ const predictionChart = document.getElementById("predictionChart");
 const letterImage = document.getElementById('letterImage');
 const signImage = document.getElementById('signImage');
 const correctMark = document.getElementById('correct');
-correctMark.src = `${ImageUrl}Logos/check-mark.png?raw=true`;
+const nextMark = document.getElementById('nextMark');
+correctMark.src = `../Assets/Images/Logos/check-mark.png`;
 
 let model, webcamRun = true, maxPredictions;
 
@@ -53,7 +97,6 @@ initilize_btn.addEventListener("click", () => {
 
 });
 
-const letters = ["G", "H", "I", "J", "K", "L"];
 
 
 let startTime = new Date().getTime();
@@ -80,19 +123,19 @@ const camera = new Camera(videoElement, {
 
 
 let letterIndex = 0;
-letterImage.src = `${ImageUrl}Alphabet/${letters[letterIndex]}.png?raw=true`;
-signImage.src = `${ImageUrl}Signs/${letters[letterIndex]}.png?raw=true`;
+letterImage.src = `${ImageUrl}/${letters[letterIndex]}.png?raw=true`;
+signImage.src = `${SignUrl}/${letters[letterIndex]}.png?raw=true`;
 
 
 
 
 async function init() {
 
-    const modelURL = URL + "model.json";
-    const metadataURL = URL + "metadata.json";
+    const modelUrl = Url + "model.json";
+    const metadataUrl = Url + "metadata.json";
 
     // load the model and metadata
-    model = await tmImage.load(modelURL, metadataURL);
+    model = await tmImage.load(modelUrl, metadataUrl);
     maxPredictions = model.getTotalClasses();
     // append elements to the DOM
     for (let i = 0; i < maxPredictions; i++) { // and class labels
@@ -145,36 +188,29 @@ async function predict() {
             maxIndex = i;
         }
     }
-    if (startTime + 5000 < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]) {
-
-        // give tick mark
-        if(correctMark.src == "http://localhost:5173/Assets/Images/Logos/check-mark.png"){
-            console.log('inside src');
-            correctMark.src =  "http://localhost:5173/Assets/Images/Logos/thumbs-up.png";
-        }
-        else{
-            console.log('inside src 123');
-            correctMark.src = "http://localhost:5173/Assets/Images/Logos/check-mark.png";
-        }
-
-        // console.log(correctMark.src);
+    if (startTime + detectionDelay < new Date().getTime() && prediction[maxIndex].className == letters[letterIndex]) {
         
         correctMark.classList.remove("hidden");
+        nextMark.classList.remove("hidden");
         setTimeout(() => {
+            nextMark.classList.add("hidden");
             correctMark.classList.add("hidden");
-        }, 1000);
-
+        }, 1500);
 
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
-        letterImage.src =  `${ImageUrl}Alphabet/${letters[letterIndex]}.png?raw=true`;
-        signImage.src =  `${ImageUrl}Signs/${letters[letterIndex]}.png?raw=true`;
+        letterImage.src =  `${ImageUrl}/${letters[letterIndex]}.png?raw=true`;
+        signImage.src =  `${SignUrl}/${letters[letterIndex]}.png?raw=true`;
     }
-    if(initilize_btn.innerText === "Stop webcam" && startTime + 15000 < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
+    if(initilize_btn.innerText === "Stop webcam" && startTime + waitTime < new Date().getTime() &&  prediction[maxIndex].className != letters[letterIndex]){
+        nextMark.classList.remove("hidden");
+        setTimeout(() => {
+            nextMark.classList.add("hidden");
+        }, 1500)
         startTime = new Date().getTime();
         letterIndex = (letterIndex + 1) % letters.length;
-        letterImage.src =  `${ImageUrl}Alphabet/${letters[letterIndex]}.png?raw=true`;
-        signImage.src =  `${ImageUrl}Signs/${letters[letterIndex]}.png?raw=true`;
+        letterImage.src =  `${ImageUrl}/${letters[letterIndex]}.png?raw=true`;
+        signImage.src =  `${SignUrl}/${letters[letterIndex]}.png?raw=true`;
     }
     const data = [{
         x: letterprobabilities,

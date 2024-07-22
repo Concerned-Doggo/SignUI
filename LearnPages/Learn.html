@@ -33,19 +33,19 @@
 
   <body class="">
     <nav
-      class="bg-[#edf0f5] flex flex-col md:flex-row pl-[25vw] justify-center md:justify-between text-sky-400 align-middle md:mb-10 md:px-4"
+      class="bg-[#edf0f5] flex flex-col md:flex-row pl-[25vw] justify-center md:justify-between text-gray-400 align-middle md:mb-10 md:px-4"
     >
-      <a class="p-3 flex font-bold text-2xl rounded-b-3xl" href="/">
+      <a class="p-3 flex font-bold text-2xl text-sky-400 rounded-b-3xl" href="/">
         <img
-          class="w-10 mr-2"
+          class="w-10 mr-2 "
           src="https://github.com/Concerned-Doggo/SignMeUp/blob/main/public/images/transparent-logo-1.png?raw=true"
         />
         SignMeUp!
       </a>
       <div class="flex gap-5 font-semibold p-3 rounded-b-3xl">
-        <a href="/">Home</a>
-        <a href="/aboutus" class="text-gray-400">AboutUs</a>
-        <a href="https://github.com/concerned-doggo" class="text-gray-400">Github</a>
+        <a href="/" class="hover:underline hover:text-sky-400">Home</a>
+        <a href="/aboutus" class="hover:underline hover:text-sky-400">AboutUs</a>
+        <a href="https://github.com/concerned-doggo" class="hover:underline hover:text-sky-400">Github</a>
       </div>
     </nav>
 
@@ -80,9 +80,16 @@
         <img
           id="correct"
           src="../Assets/Images/Logos/check-mark.png"
-          style="width: 120px; top: 35%; left: 42%"
+          style="width: 120px; top: 35%; left: 44%"
           class="hidden rounded-3xl absolute"
         />
+
+        <p
+          id="nextMark"
+          src="../Assets/Images/Logos/check-mark.png"
+          style="top: 55%; left: 45%; color: green; background: white;"
+          class="hidden absolute text-3xl font-bold bg-gray-300 rounded-xl p-2 border-black border-2 "
+        >Next</p>
 
         <video class="input_video" style="display: None"></video>
         <canvas
@@ -94,26 +101,7 @@
       <div id="predictionChart" class="invisible md:visible text-white col-span-2 "></div>
     </div>
     
-    <footer
-      class="bg-gradient-to-b md:hidden from-sky-200 via-sky-800 via-75% to-sky-950 text-center text-white pt-5 rounded-t-3xl"
-    >
-      <div class="mb-10 mt-10 flex flex-wrap justify-center gap-5">
-        <h1 class="text-3xl w-full font-bold">SignMeUp!</h1>
-        <a href="/" class="font-semibold">Home</a>
-        <a href="/LearnPages/A-F.html" class="font-semibold">AboutUs</a>
-        <a href="https://github.com/concerned-doggo" class="font-semibold"
-          >Github</a
-        >
-      </div>
-      <div>
-        <h1 class="font-bold text-xl">Made with ❤️</h1>
-        <p class="font-semibold">2024</p>
-      </div>
-      <div class="border-sky-950 border-4"></div>
-    </footer>
-
-
     
-    <script type="module" src="./M-R.js"></script>
+    <script type="module" src="./Learn.js"></script>
   </body>
 </html>

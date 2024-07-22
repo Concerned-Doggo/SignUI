@@ -4,7 +4,8 @@ export default {
     "./index.html",
     "./*.html",
     "./main.js",
-    "./LearnPages/A-F.html",
+    "./LearnPages/Learn.{js,html}",
+    "./QuizPages/Quiz.{js,html}",
     "./src/**/*.{js,html}",
   ],
   theme: {
